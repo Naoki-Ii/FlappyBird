@@ -57,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //アイテム用ノード
         itemNode = SKSpriteNode()
+        scrollNode.addChild(itemNode)
         
         //各種スプライトを生成する処理をメソッドに分割
         setupGround()
@@ -116,10 +117,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         } else if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory || (contact.bodyB.categoryBitMask & itemCategory == itemCategory) {
             
+            if (contact.bodyA.categoryBitMask & itemCategory)  == itemCategory {
+                itemNode.removeAllChildren()
+                
+            } else if (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
+                itemNode.removeAllChildren()
+            }
+            
             //アイテムと衝突
             print("ItemScoreUp")
             itemscore += 1
             itemscoreLabelNode.text = "ItemScore:\(itemscore)"
+            
             
             //アイテム取得した時の効果音
             let soundURL = Bundle.main.url(forResource: "birdVoice", withExtension: "mp3")
@@ -131,6 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             //壁か地面と衝突した
             print("GameOver")
+            
             
             //衝突した時の効果音
             let soundURL = Bundle.main.url(forResource: "birdVoice2", withExtension: "mp3")
@@ -165,6 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bird.zRotation = 0
         
         wallNode.removeAllChildren()
+        itemNode.removeAllChildren()
         
         bird.speed = 1
         scrollNode.speed = 1
@@ -427,9 +438,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //衝突のカテゴリー設定
         bird.physicsBody?.categoryBitMask = birdCategory
-        bird.physicsBody?.collisionBitMask = groundCategory | wallCategory | itemCategory
+        bird.physicsBody?.collisionBitMask = groundCategory | wallCategory
         bird.physicsBody?.contactTestBitMask = groundCategory | wallCategory | itemCategory
-        //bird.physicsBody?.contactTestBitMask = itemCategory
         
         //アニメーション設定
         bird.run(flap)
@@ -446,23 +456,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let itemTexture = SKTexture(imageNamed: "apple")
         itemTexture.filteringMode = .linear //鮮明に表示
         
+        //let wallTexture = SKTexture(imageNamed: "wall")
+        
         //移動する距離を計算
-        let movingDistance = CGFloat(self.frame.size.width + itemTexture.size().width)
+        let movingDistance = CGFloat(self.frame.size.width + itemTexture.size().width + 100)
         
         //画面外まで移動するアクションを作成
-        let moveItem = SKAction.moveBy(x: -movingDistance, y: 0, duration: 4)
+        let moveItem = SKAction.moveBy(x: -movingDistance, y: 0, duration: 5)
         
-        //自信を取り除くアクションを作成
+        //自身を取り除くアクションを作成
         let removeItem = SKAction.removeFromParent()
         
         //二つのアニメーションを順に実行するアクションを作成
         let ItemAnimation = SKAction.sequence([moveItem, removeItem])
         
-        //鳥の画像サイズを取得
-        let birdSize = SKTexture(imageNamed: "bird_a").size()
         
-        let random = CGFloat.random(in: 3..<6)
-        let slit_length = birdSize.height * random
         
         
         //アイテムを生成するアクションを作成
@@ -471,8 +479,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //アイテム関連のノードを乗せるノードを作成
             let item = SKSpriteNode(texture: itemTexture)
             
-             //アイテムを作成
-            item.position = CGPoint(x: self.frame.size.width + 100,  y: self.frame.size.height / 2 + slit_length)
+            //鳥の画像サイズを取得
+            let birdSize = SKTexture(imageNamed: "bird_a").size()
+            
+            let random = CGFloat.random(in: -3..<4)
+            print("random\(random)")
+            let slit_length = birdSize.height * random
+            
+            //アイテムを作成
+            item.position = CGPoint(x: self.frame.size.width + 120,  y: self.frame.size.height / 2 + slit_length)
             item.zPosition = -50 //雲より手前地面より奥
             
             //print("item\(item.position)")
@@ -480,12 +495,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //スプライトに物理演算を設定する
             item.physicsBody = SKPhysicsBody(rectangleOf: itemTexture.size())
             item.physicsBody?.categoryBitMask = self.itemCategory
+            item.physicsBody?.collisionBitMask = 0
+            
             
             //衝突の時に動かないようにする
             item.physicsBody?.isDynamic = false
-            self.addChild(item)
-            
-            
             
             item.run(ItemAnimation)
             
@@ -494,7 +508,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         //  次のアイテム作成までの待ち時間のアクションを作成
-        let waitAnimation = SKAction.wait(forDuration: 2)
+        let waitAnimation = SKAction.wait(forDuration: 4)
         
         //アイテムを作成→時間待ち→アイテムの作成を無限に繰り返すアクションを作成
         let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
