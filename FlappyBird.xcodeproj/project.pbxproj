@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C274065240BC5AD00478338 /* birdVoice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C274064240BC5AD00478338 /* birdVoice.mp3 */; };
+		4C274067240BC7A400478338 /* birdVoice2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C274066240BC7A400478338 /* birdVoice2.mp3 */; };
+		4C274069240BCA7900478338 /* birdVoice3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C274068240BCA7900478338 /* birdVoice3.mp3 */; };
 		4C5DD8722406A1A2006366CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DD8712406A1A2006366CF /* AppDelegate.swift */; };
 		4C5DD8742406A1A2006366CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DD8732406A1A2006366CF /* SceneDelegate.swift */; };
 		4C5DD8762406A1A2006366CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DD8752406A1A2006366CF /* ViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C274064240BC5AD00478338 /* birdVoice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = birdVoice.mp3; sourceTree = "<group>"; };
+		4C274066240BC7A400478338 /* birdVoice2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = birdVoice2.mp3; sourceTree = "<group>"; };
+		4C274068240BCA7900478338 /* birdVoice3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = birdVoice3.mp3; sourceTree = "<group>"; };
 		4C5DD86E2406A1A2006366CF /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5DD8712406A1A2006366CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C5DD8732406A1A2006366CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +68,9 @@
 				4C5DD8732406A1A2006366CF /* SceneDelegate.swift */,
 				4C5DD8752406A1A2006366CF /* ViewController.swift */,
 				4C66DD132407D87C0026A839 /* GameScene.swift */,
+				4C274064240BC5AD00478338 /* birdVoice.mp3 */,
+				4C274068240BCA7900478338 /* birdVoice3.mp3 */,
+				4C274066240BC7A400478338 /* birdVoice2.mp3 */,
 				4C5DD8772406A1A2006366CF /* Main.storyboard */,
 				4C5DD87A2406A1A5006366CF /* Assets.xcassets */,
 				4C5DD87C2406A1A5006366CF /* LaunchScreen.storyboard */,
@@ -130,6 +139,9 @@
 			files = (
 				4C5DD87E2406A1A5006366CF /* LaunchScreen.storyboard in Resources */,
 				4C5DD87B2406A1A5006366CF /* Assets.xcassets in Resources */,
+				4C274069240BCA7900478338 /* birdVoice3.mp3 in Resources */,
+				4C274067240BC7A400478338 /* birdVoice2.mp3 in Resources */,
+				4C274065240BC5AD00478338 /* birdVoice.mp3 in Resources */,
 				4C5DD8792406A1A2006366CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
