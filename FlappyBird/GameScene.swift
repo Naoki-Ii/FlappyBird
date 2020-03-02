@@ -118,10 +118,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory || (contact.bodyB.categoryBitMask & itemCategory == itemCategory) {
             
             if (contact.bodyA.categoryBitMask & itemCategory)  == itemCategory {
-                itemNode.removeAllChildren()
+                contact.bodyA.node?.removeFromParent()
                 
             } else if (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
-                itemNode.removeAllChildren()
+                contact.bodyB.node?.removeFromParent()
             }
             
             //アイテムと衝突
@@ -508,7 +508,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         //  次のアイテム作成までの待ち時間のアクションを作成
-        let waitAnimation = SKAction.wait(forDuration: 4)
+        let waitAnimation = SKAction.wait(forDuration: 2)
         
         //アイテムを作成→時間待ち→アイテムの作成を無限に繰り返すアクションを作成
         let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
